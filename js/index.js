@@ -322,9 +322,6 @@ let block_2 = {
     randomize_order: true,
 }
 
-// timeline.push(pavlovia_init);
-//timeline.push(pavlovia_finish)
-
 timeline.push(
               preload, enter_fullscreen, participantInfo,instructions,
               practice_trials, block_1, rest, notice, block_2,
