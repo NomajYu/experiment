@@ -1,6 +1,6 @@
 let jsPsych = initJsPsych({
     on_finish: function () {
-        jsPsych.data.displayData();
+        jsPsych.data.get().localSave('csv','mydata.csv');
     }
 });
 let timeline = [];
