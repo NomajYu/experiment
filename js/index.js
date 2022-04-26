@@ -203,6 +203,7 @@ let cueDirect = {
     choices: "NO_KEYS",
 }
 
+//第三帧，转移注视图片
 let image_object = {
     obj_type: 'image',
     file: function () {
@@ -212,6 +213,7 @@ let image_object = {
     show_start_time: 0
 }
 
+//第三帧，语音
 let sound_object = {
     obj_type: 'sound', 
     file: function () {
@@ -221,10 +223,11 @@ let sound_object = {
     show_start_time: 0,
 } 
 
-//第三帧，转移注视
+//第三帧综合
 let cueAvert = {
     type: jsPsychPsychophysics, 
     stimuli: [image_object, sound_object],
+    background_color: '#FFFFFF',
     trial_duration: 300,
     choices: "NO_KEYS",
 };

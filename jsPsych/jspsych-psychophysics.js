@@ -1479,12 +1479,12 @@
                 this.audio.buffer = buffer;
                 this.audio.connect(this.context.destination);
                 this.prepared = true
-                console.log('WebAudio')
+                // console.log('WebAudio')
               } else {
                 this.audio = buffer;
                 this.audio.currentTime = 0;
                 this.prepared = true
-                console.log('HTML5 audio')
+                // console.log('HTML5 audio')
               }
               // setupTrial();
             }.bind(this))
