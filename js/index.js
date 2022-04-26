@@ -80,6 +80,10 @@ for (let i = 1; i < 3; i++) {
     imgList.push(cuePath + "cw" + i + '.png');
 }
 
+for (let i = 1; i < 5; i++) {
+    imgList.push(targetPath + "pt" + i + '.png');
+}
+
 for (let i = 0; i < 128; i++) {
     arrayOfMan[i].dg = "md";
     arrayOfWoman[i].dg = "wd";
