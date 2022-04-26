@@ -213,7 +213,7 @@ let image_object = {
 }
 
 let sound_object = {
-    type: 'sound', 
+    obj_type: 'sound', 
     file: function () {
         let voice = voicePath + jsPsych.timelineVariable('voice') + '.wav';
         return voice;
