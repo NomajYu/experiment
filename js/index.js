@@ -206,8 +206,8 @@ let cueDirect = {
 let image_object = {
     obj_type: 'image',
     file: function () {
-        let imgPath = cuePath + jsPsych.timelineVariable('cue') + '.png';
-        return imgPath;
+        let img = cuePath + jsPsych.timelineVariable('cue') + '.png';
+        return img;
     },
     show_start_time: 0
 }
@@ -215,8 +215,8 @@ let image_object = {
 let sound_object = {
     type: 'sound', 
     file: function () {
-        let voicePath = voicePath + jsPsych.timelineVariable('voice') + '.wav';
-        return voicePath;
+        let voice = voicePath + jsPsych.timelineVariable('voice') + '.wav';
+        return voice;
     },
     show_start_time: 0,
 } 
