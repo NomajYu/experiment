@@ -1,4 +1,5 @@
 let jsPsych = initJsPsych({
+    use_webaudio:true,
     on_finish: function () {
         jsPsych.data.get().localSave('csv',expName);
     }
@@ -223,7 +224,7 @@ let sound_object = {
 //第三帧，转移注视
 let cueAvert = {
     type: jsPsychPsychophysics, 
-    stimuli: [image_object],
+    stimuli: [image_object, sound_object],
     trial_duration: 300,
     choices: "NO_KEYS",
 };
