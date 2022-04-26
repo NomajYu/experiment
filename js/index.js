@@ -8,10 +8,9 @@ let arrayOfMan = [];
 let arrayOfWoman = [];
 let targetList = [];
 let imgList = [];
-let imgPath = 'asset/img/target/'
 let cuePath = 'asset/img/cue/';
-let voicePath = 'asset/audio/';
 let targetPath = 'asset/img/target/';
+let voicePath = 'asset/audio/';
 let arrayOfPractice = [];
 let keyInfo = '';
 
@@ -73,6 +72,14 @@ for (let i = 0; i < 16; i++) {
 arrayOfMan.shuffle();
 arrayOfWoman.shuffle();
 
+imgList.push(cuePath + "pcd" + '.png', cuePath + "md" + '.png', cuePath + "wd" + '.png')
+
+for (let i = 1; i < 3; i++) {
+    imgList.push(cuePath + "pc" + i + '.png');
+    imgList.push(cuePath + "cm" + i + '.png');
+    imgList.push(cuePath + "cw" + i + '.png');
+}
+
 for (let i = 0; i < 128; i++) {
     arrayOfMan[i].dg = "md";
     arrayOfWoman[i].dg = "wd";
@@ -80,12 +87,12 @@ for (let i = 0; i < 128; i++) {
         let n = i + 1;
         arrayOfMan[i].target = "fY" + n;
         arrayOfWoman[i].target = "fY" + n;
-        imgList.push(imgPath + "fY" + n + '.png')
+        imgList.push(targetPath + "fY" + n + '.png')
     } else {
         let n = i - 63;
         arrayOfMan[i].target = "jY" + n;
         arrayOfWoman[i].target = "jY" + n;
-        imgList.push(imgPath + "jY" + n + '.png')
+        imgList.push(targetPath + "jY" + n + '.png')
     }
 }
 
@@ -104,9 +111,9 @@ var enter_fullscreen = {
 let preload = {
     type: jsPsychPreload,
     images: imgList,
-    audio: ['asset/audio/vm1.wav', 'asset/audio/vm1.wav', 'asset/audio/vw1.wav', 'asset/audio/vw2.wav', 'asset/audio/vp1.wav', 'asset/audio/vp2.wav'],
+    audio: ['asset/audio/vm1.wav', 'asset/audio/vm2.wav', 'asset/audio/vw1.wav', 'asset/audio/vw2.wav', 'asset/audio/vp1.wav', 'asset/audio/vp2.wav'],
     show_detailed_errors: true,
-    message:`<div>正在加载资源，请稍后（1/2）</div>`
+    message:`<div>正在加载资源，请稍后</div>`
 }
 
 //收集被试信息
