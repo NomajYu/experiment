@@ -340,9 +340,8 @@ let block_2 = {
 }
 
 timeline.push(
-              preload, enter_fullscreen, participantInfo,instructions,
-              practice_trials, block_1, rest, notice, block_2,
-              leave_fullscreen, end
+              preload, enter_fullscreen, participantInfo,instructions, practice_trials,
+            //   block_1, rest, notice, block_2, leave_fullscreen, end
             )
 
 jsPsych.run(timeline);
