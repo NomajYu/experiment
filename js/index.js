@@ -202,20 +202,46 @@ let cueDirect = {
     choices: "NO_KEYS",
 }
 
+let image_object = {
+    obj_type: 'image',
+    file: function () {
+        let imgPath = cuePath + jsPsych.timelineVariable('cue') + '.png';
+        return imgPath;
+    },
+    show_start_time: 0
+}
+
+let sound_object = {
+    type: 'sound', 
+    file: function () {
+        let voicePath = voicePath + jsPsych.timelineVariable('voice') + '.wav';
+        return voicePath;
+    },
+    show_start_time: 0,
+} 
+
 //第三帧，转移注视
 let cueAvert = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: function () {
-        let voice = voicePath + jsPsych.timelineVariable('voice') + '.wav';
-        let avertImg = cuePath + jsPsych.timelineVariable('cue') + '.png';
-        return `
-              <div><audio src="${voice}" autoplay></audio></div>
-              <div><img src="${avertImg}"></div>
-         `
-    },
+    type: jsPsychPsychophysics, 
+    stimuli: [image_object],
     trial_duration: 300,
     choices: "NO_KEYS",
 };
+
+// //第三帧，转移注视
+// let cueAvert = {
+//     type: jsPsychHtmlKeyboardResponse,
+//     stimulus: function () {
+//         let voice = voicePath + jsPsych.timelineVariable('voice') + '.wav';
+//         let avertImg = cuePath + jsPsych.timelineVariable('cue') + '.png';
+//         return `
+//               <div><audio src="${voice}" autoplay></audio></div>
+//               <div><img src="${avertImg}"></div>
+//          `
+//     },
+//     trial_duration: 300,
+//     choices: "NO_KEYS",
+// };
 
 //第四帧，目标刺激，按键反应
 let target = {
@@ -347,7 +373,7 @@ let block_2 = {
 
 timeline.push(
               preload, enter_fullscreen, participantInfo,instructions, practice_trials,
-              block_1, rest, notice, block_2,
+            //   block_1, rest, notice, block_2,
               leave_fullscreen, end
             )
 
