@@ -120,7 +120,7 @@ var enter_fullscreen = {
 let preload = {
     type: jsPsychPreload,
     images: imgList,
-    audio: voicePath,
+    audio: voiceList,
     show_detailed_errors: true,
     message:`<div>正在加载资源，请稍后</div>`
 }
