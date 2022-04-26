@@ -8,6 +8,7 @@ let arrayOfMan = [];
 let arrayOfWoman = [];
 let targetList = [];
 let imgList = [];
+let voiceList = [];
 let cuePath = 'asset/img/cue/';
 let targetPath = 'asset/img/target/';
 let voicePath = 'asset/audio/';
@@ -78,6 +79,10 @@ for (let i = 1; i < 3; i++) {
     imgList.push(cuePath + "pc" + i + '.png');
     imgList.push(cuePath + "cm" + i + '.png');
     imgList.push(cuePath + "cw" + i + '.png');
+    voiceList.push(voicePath + "vp" + i + ".wav");
+    voiceList.push(voicePath + "vm" + i + ".wav");
+    voiceList.push(voicePath + "vw" + i + ".wav");
+
 }
 
 for (let i = 1; i < 5; i++) {
@@ -115,7 +120,7 @@ var enter_fullscreen = {
 let preload = {
     type: jsPsychPreload,
     images: imgList,
-    audio: ['asset/audio/vm1.wav', 'asset/audio/vm2.wav', 'asset/audio/vw1.wav', 'asset/audio/vw2.wav', 'asset/audio/vp1.wav', 'asset/audio/vp2.wav'],
+    audio: voicePath,
     show_detailed_errors: true,
     message:`<div>正在加载资源，请稍后</div>`
 }
