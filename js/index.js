@@ -1,7 +1,7 @@
 let jsPsych = initJsPsych({
-    use_webaudio:true,
+    use_webaudio: true,
     on_finish: function () {
-        jsPsych.data.get().localSave('csv',expName);
+        jsPsych.data.get().localSave('csv', expName);
     }
 });
 let expName = '实验结果';
@@ -124,7 +124,7 @@ let preload = {
     images: imgList,
     audio: voiceList,
     show_detailed_errors: true,
-    message:`<div>正在加载资源，请稍后</div>`
+    message: `<div>正在加载资源，请稍后</div>`
 }
 
 //收集被试信息
@@ -170,15 +170,17 @@ let instructions = {
         `,
         `
         <div >请仔细阅读以下实验说明</div>
-        <div style="margin-top:12px">首先你将会看到一张直视你的面孔，随后这张面孔会向左或向右注视，</div>
-        <div style="margin-top:12px">接着屏幕左右两侧会随机出现一张面孔图片，你需要根据该图片进行如下操作：</div>
-        <div style="margin-top:12px">1）当图片为女性时请按<text style="color:red">“F”</text>键，当图片为男性时请按<text style="color:red">“J”</text>键</div>
-        <div style="margin-top:12px">2）随后，需要对刚刚出现的面孔的喜爱程度进行1-9的打分</div>
-        <div style="margin-top:12px">实验中途遇到任何问题请与主试联系</div>
-        <div style="margin-top:12px">准备好了请按空格键开始练习</div>
+        <div class="mt12">
+            <div class="mt12">首先你将会看到一张直视你的面孔，随后这张面孔会向左或向右注视，</div>
+            <div class="mt12">接着屏幕左右两侧会随机出现一张照片，你需要根据该照片进行如下操作：</div>
+            <div class="mt12">1）当照片为女性时请按<text style="color:red">“F”</text>键，当照片为男性时请按<text style="color:red">“J”</text>键</div>
+            <div class="mt12">2）对照片的喜爱程度进行1-9的打分</div>
+            <div class="mt12">实验中途遇到任何问题请与主试联系</div>
+            <div class="mt12">准备好了请按空格键开始<text style="font-weight:bold">练习</text></div>
+        </div>
        `
     ],
-    key_forward:' ',
+    key_forward: ' ',
     allow_backward: false
 }
 
@@ -215,17 +217,17 @@ let image_object = {
 
 //第三帧，语音
 let sound_object = {
-    obj_type: 'sound', 
+    obj_type: 'sound',
     file: function () {
         let voice = voicePath + jsPsych.timelineVariable('voice') + '.wav';
         return voice;
     },
     show_start_time: 0,
-} 
+}
 
 //第三帧综合
 let cueAvert = {
-    type: jsPsychPsychophysics, 
+    type: jsPsychPsychophysics,
     stimuli: [image_object, sound_object],
     background_color: '#FFFFFF',
     trial_duration: 300,
@@ -324,17 +326,20 @@ let notice = {
 var leave_fullscreen = {
     type: jsPsychFullscreen,
     fullscreen_mode: false,
-    on_finish: function() {
-        jsPsych.data.get().localSave('csv','mydata.csv');
+    on_finish: function () {
+        jsPsych.data.get().localSave('csv', 'mydata.csv');
     }
 }
 
 //实验结束提示
 let end = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<div>实验已全部完成，非常感谢您的配合，祝您生活愉快！</div>
-              <div>浏览器会自动下载实验结果（csv文件），请将实验结果发送给主试以领取被试费</div>
-              <div>若您发现浏览器没有自动下载实验结果，请停留在此页面，及时与主试联系</div>
+    stimulus: `
+            <div>实验已全部完成，非常感谢您的配合，祝您生活愉快 : ) </div>
+            <div class="mt12">
+                <div>浏览器会自动下载实验结果（csv文件），请将实验结果发送给主试以领取被试费</div>
+                <div>若您发现浏览器没有自动下载实验结果，请停留在此页面，及时与主试联系</div>
+            </div>
               `,
     response_ends_trial: true,
     choices: [" "],
@@ -376,9 +381,9 @@ let block_2 = {
 }
 
 timeline.push(
-              preload, enter_fullscreen, participantInfo,instructions, practice_trials,
-            //   block_1, rest, notice, block_2,
-              leave_fullscreen, end
-            )
+    preload, enter_fullscreen, participantInfo, instructions, practice_trials,
+    block_1, rest, notice, block_2,
+    leave_fullscreen, end
+)
 
 jsPsych.run(timeline);

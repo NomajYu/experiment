@@ -4,3 +4,7 @@
     margin-right: 16px;
     border-radius: 8px
 }
+
+.mt12 > div {
+    margin-top: 15px;
+}
