@@ -1,9 +1,10 @@
 let jsPsych = initJsPsych({
     on_finish: function () {
-        jsPsych.data.get().localSave('csv','mydata.csv');
+        jsPsych.data.get().localSave('csv',expName);
     }
 });
-let timeline = [];
+let expName = '实验结果';
+let timeline = []
 let arrayOfMan = [];
 let arrayOfWoman = [];
 let targetList = [];
@@ -147,13 +148,13 @@ let participantInfo = {
     ],
     button_label: "进入实验",
     on_finish: function (data) {
-        console.log(data);
-        let id = parseInt(data.response.pId)
-        if (id % 2 === 0) {
-            keyInfo = "J"
-        } else {
-            keyInfo = "F"
-        }
+        expName = expName + data.response.pId + ".csv";
+        // let id = parseInt(data.response.pId)
+        // if (id % 2 === 0) {
+        //     keyInfo = "J"
+        // } else {
+        //     keyInfo = "F"
+        // }
     }
 }
 
@@ -292,16 +293,21 @@ let notice = {
 //离开全屏
 var leave_fullscreen = {
     type: jsPsychFullscreen,
-    fullscreen_mode: false
+    fullscreen_mode: false,
+    on_finish: function() {
+        jsPsych.data.get().localSave('csv','mydata.csv');
+    }
 }
 
 //实验结束提示
 let end = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<div>实验已全部完成，感谢您的配合！</div>
-              <div>请凭此页面截图跟主试领取被试费</div>`,
-    response_ends_trial: false,
-    choices: "NO_KEYS",
+    stimulus: `<div>实验已全部完成，非常感谢您的配合，祝您生活愉快！</div>
+              <div>浏览器会自动下载实验结果（csv文件），请将实验结果发送给主试以领取被试费</div>
+              <div>若您发现浏览器没有自动下载实验结果，请停留在此页面，及时与主试联系</div>
+              `,
+    response_ends_trial: true,
+    choices: [" "],
 }
 
 // 封装一个试次
@@ -341,7 +347,8 @@ let block_2 = {
 
 timeline.push(
               preload, enter_fullscreen, participantInfo,instructions, practice_trials,
-            //   block_1, rest, notice, block_2, leave_fullscreen, end
+              block_1, rest, notice, block_2,
+              leave_fullscreen, end
             )
 
 jsPsych.run(timeline);
