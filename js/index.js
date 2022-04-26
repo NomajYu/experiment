@@ -101,23 +101,13 @@ var enter_fullscreen = {
 }
 
 //预加载
-let preload1 = {
+let preload = {
     type: jsPsychPreload,
     images: imgList,
     audio: ['asset/audio/vm1.wav', 'asset/audio/vm1.wav', 'asset/audio/vw1.wav', 'asset/audio/vw2.wav', 'asset/audio/vp1.wav', 'asset/audio/vp2.wav'],
     show_detailed_errors: true,
     message:`<div>正在加载资源，请稍后（1/2）</div>`
 }
-
-//预加载
-let preload2 = {
-    type: jsPsychPreload,
-    images: imgList,
-    audio: ['asset/audio/vm1.wav', 'asset/audio/vm1.wav', 'asset/audio/vw1.wav', 'asset/audio/vw2.wav', 'asset/audio/vp1.wav', 'asset/audio/vp2.wav'],
-    show_detailed_errors: true,
-    message:`<div>正在加载资源，请稍后（2/2）</div>`
-}
-
 
 //收集被试信息
 let participantInfo = {
@@ -334,7 +324,7 @@ let block_2 = {
 }
 
 timeline.push(
-              preload1, preload2, enter_fullscreen, participantInfo,instructions,
+              preload, enter_fullscreen, participantInfo,instructions,
               practice_trials, block_1, rest, notice, block_2,
               leave_fullscreen, end
             )
