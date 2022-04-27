@@ -9,6 +9,7 @@ let timeline = []
 let arrayOfMan = [];
 let arrayOfWoman = [];
 let targetList = [];
+let jfyList = [];
 let imgList = [];
 let voiceList = [];
 let cuePath = 'asset/img/cue/';
@@ -47,33 +48,29 @@ for (let i = 1; i < 5; i++) {
 for (let i = 0; i < 16; i++) {
     for (let j = 1; j < 3; j++) {
         for (let k = 1; k < 3; k++) {
-            let v = j == 1 ? 1 : 2;
             arrayOfMan.push({
                 cue: 'cm1',
                 direction: 'd' + k,
-                voice: 'vm' + v
+                voice: 'vm' + j
             })
             arrayOfMan.push({
                 cue: 'cm2',
                 direction: 'd' + k,
-                voice: 'vm' + v
+                voice: 'vm' + j
             })
             arrayOfWoman.push({
                 cue: 'cw1',
                 direction: 'd' + k,
-                voice: 'vw' + v
+                voice: 'vw' + j
             })
             arrayOfWoman.push({
                 cue: 'cw2',
                 direction: 'd' + k,
-                voice: 'vw' + v
+                voice: 'vw' + j
             })
         }
     }
 }
-
-arrayOfMan.shuffle();
-arrayOfWoman.shuffle();
 
 imgList.push(cuePath + "pcd" + '.png', cuePath + "md" + '.png', cuePath + "wd" + '.png')
 
@@ -91,20 +88,17 @@ for (let i = 1; i < 5; i++) {
     imgList.push(targetPath + "pt" + i + '.png');
 }
 
+for (let i = 1; i < 65; i++) {
+    jfyList.push("jY" + i,"fY" + i);
+}
+
+jfyList.shuffle();
+
 for (let i = 0; i < 128; i++) {
     arrayOfMan[i].dg = "md";
     arrayOfWoman[i].dg = "wd";
-    if (i <= 63) {
-        let n = i + 1;
-        arrayOfMan[i].target = "fY" + n;
-        arrayOfWoman[i].target = "fY" + n;
-        imgList.push(targetPath + "fY" + n + '.png')
-    } else {
-        let n = i - 63;
-        arrayOfMan[i].target = "jY" + n;
-        arrayOfWoman[i].target = "jY" + n;
-        imgList.push(targetPath + "jY" + n + '.png')
-    }
+    arrayOfMan[i].target = jfyList[i];
+    arrayOfWoman[i].target = jfyList[i];
 }
 
 arrayOfMan.shuffle();
@@ -170,13 +164,13 @@ let instructions = {
         `,
         `
         <div >请仔细阅读以下实验说明</div>
-        <div class="mt12">
-            <div class="mt12">首先你将会看到一张直视你的面孔，随后这张面孔会向左或向右注视，</div>
-            <div class="mt12">接着屏幕左右两侧会随机出现一张照片，你需要根据该照片进行如下操作：</div>
-            <div class="mt12">1）当照片为女性时请按<text style="color:red">“F”</text>键，当照片为男性时请按<text style="color:red">“J”</text>键</div>
-            <div class="mt12">2）对照片的喜爱程度进行1-9的打分</div>
-            <div class="mt12">实验中途遇到任何问题请与主试联系</div>
-            <div class="mt12">准备好了请按空格键开始<text style="font-weight:bold">练习</text></div>
+        <div class="mt15">
+            <div class="mt15">首先你将会看到一张直视你的面孔，随后这张面孔会向左或向右注视，</div>
+            <div class="mt15">接着屏幕左右两侧会随机出现一张照片，你需要根据该照片进行如下操作：</div>
+            <div class="mt15">1）当照片为女性时请按<text style="color:red">“F”</text>键，当照片为男性时请按<text style="color:red">“J”</text>键</div>
+            <div class="mt15">2）对照片的喜爱程度进行1-9的打分</div>
+            <div class="mt15">实验中途遇到任何问题请与主试联系</div>
+            <div class="mt15">准备好了请按空格键开始<text style="font-weight:bold">练习</text></div>
         </div>
        `
     ],
@@ -233,21 +227,6 @@ let cueAvert = {
     trial_duration: 300,
     choices: "NO_KEYS",
 };
-
-// //第三帧，转移注视
-// let cueAvert = {
-//     type: jsPsychHtmlKeyboardResponse,
-//     stimulus: function () {
-//         let voice = voicePath + jsPsych.timelineVariable('voice') + '.wav';
-//         let avertImg = cuePath + jsPsych.timelineVariable('cue') + '.png';
-//         return `
-//               <div><audio src="${voice}" autoplay></audio></div>
-//               <div><img src="${avertImg}"></div>
-//          `
-//     },
-//     trial_duration: 300,
-//     choices: "NO_KEYS",
-// };
 
 //第四帧，目标刺激，按键反应
 let target = {
@@ -336,7 +315,7 @@ let end = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
             <div>实验已全部完成，非常感谢您的配合，祝您生活愉快 : ) </div>
-            <div class="mt12">
+            <div class="mt15">
                 <div>浏览器会自动下载实验结果（csv文件），请将实验结果发送给主试以领取被试费</div>
                 <div>若您发现浏览器没有自动下载实验结果，请停留在此页面，及时与主试联系</div>
             </div>
