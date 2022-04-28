@@ -90,7 +90,7 @@ for (let i = 1; i < 3; i++) {
     voiceList.push(voicePath + "vw" + i + ".wav");
 }
 
-for (let i = 1; i < 5; i++) {
+for (let i = 1; i < 9; i++) {
     imgList.push(targetPath + "pt" + i + '.png');
 }
 
