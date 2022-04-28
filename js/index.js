@@ -183,10 +183,10 @@ let instructions = {
         `
         <div >请仔细阅读以下实验说明</div>
         <div class="mt15">
-            <div class="mt15">首先，你会看到一个人的照片，然后其会消失</div>
-            <div class="mt15">接着，在屏幕左侧或右侧会出现第二个人的照片，并且停留在屏幕上，你需要根据该照片进行以下判断：</div>
-            <div class="mt15">1）当该照片为<text class="bold">男性</text>时请按<text class="rb"> F </text>键，为<text class="bold">女性</text>时请按<text class="rb"> J </text>键（请牢记性别对应的按键）</div>
-            <div class="mt15">2）对该照片的喜爱程度进行1-9的打分，1代表非常不喜欢，9代表非常喜欢</div>
+            <div class="mt15">首先，你会看到一个人，然后其会消失</div>
+            <div class="mt15">接着，在屏幕左侧或右侧会出现第二个人，并且停留在屏幕上，你需要对第二个人进行以下判断：</div>
+            <div class="mt15">1）当第二个人为<text class="bold">男性</text>时请按<text class="rb"> F </text>键，为<text class="bold">女性</text>时请按<text class="rb"> J </text>键（请牢记性别对应的按键）</div>
+            <div class="mt15">2）对第二个人的喜爱程度进行1-9的打分，1代表非常不喜欢，9代表非常喜欢</div>
             <div class="mt15">实验中途遇到任何问题请与主试联系</div>
             <div class="mt15">准备好了请按空格键开始<text style="font-weight:bold">练习</text></div>
         </div>
@@ -272,7 +272,7 @@ let target = {
 let rate = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `<div>
-        <div style="margin-bottom:10px">请对刚刚出现的第二个人的照片进行喜爱度评价</div>
+        <div style="margin-bottom:10px">请对刚刚出现的第二个人进行喜爱度评价</div>
         <div style="margin-bottom:20px">按下数字键1~9进行评价</div>
         <div style="display:flex;">
             <div style="width:70px;height:30px"></div>
@@ -302,7 +302,7 @@ let crossroads = {
               <div style="margin-bottom:10px">练习试次已结束，按 A 再进行一次练习</div>
               <div style="margin-bottom:20px">若您已经准备好了，按 B 开始<text style="color:#CD2626">正式实验</text></div>
               <div style="margin-bottom:10px">如果对实验流程仍有疑惑，请先与主试沟通后再开始正式实验</div>
-              <div><提示：第二张照片为<text class="bold">男性</text>时请按<text class="rb"> F </text>键，为<text class="bold">女性</text>时请按<text class="rb"> J </text>键></div>
+              <div><提示：当第二个人为<text class="bold">男性</text>时请按<text class="rb"> F </text>键，为<text class="bold">女性</text>时请按<text class="rb"> J </text>键></div>
               `,
     choices: ['A', 'B']
 }
