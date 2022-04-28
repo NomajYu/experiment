@@ -8,3 +8,12 @@
 .mt15 > div {
     margin-top: 15px;
 }
+
+.bold {
+    font-weight: bold;
+}
+
+.rb {
+    color: red;
+    font-weight: bold;
+}

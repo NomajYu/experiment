@@ -9,7 +9,8 @@ let timeline = []
 let arrayOfMan = [];
 let arrayOfWoman = [];
 let targetList = [];
-let jfyList = [];
+let jyList = [];
+let fyList = [];
 let imgList = [];
 let voiceList = [];
 let cuePath = 'asset/img/cue/';
@@ -18,6 +19,7 @@ let voicePath = 'asset/audio/';
 let arrayOfPractice = [];
 let keyInfo = '';
 
+//洗牌算法
 Array.prototype.shuffle = function () {
     let input = this;
     for (let i = input.length - 1; i >= 0; i--) {
@@ -29,7 +31,8 @@ Array.prototype.shuffle = function () {
     return input;
 }
 
-for (let i = 1; i < 5; i++) {
+//生成练习数组
+for (let i = 1; i < 9; i++) {
     let x = Math.random();
     let y = Math.random();
     let z = Math.random();
@@ -45,6 +48,9 @@ for (let i = 1; i < 5; i++) {
     })
 }
 
+arrayOfPractice.shuffle();
+
+//生成block1(man)和block2(woman)数组
 for (let i = 0; i < 16; i++) {
     for (let j = 1; j < 3; j++) {
         for (let k = 1; k < 3; k++) {
@@ -72,6 +78,7 @@ for (let i = 0; i < 16; i++) {
     }
 }
 
+//生成图片以及语音数组，用于预加载
 imgList.push(cuePath + "pcd" + '.png', cuePath + "md" + '.png', cuePath + "wd" + '.png')
 
 for (let i = 1; i < 3; i++) {
@@ -81,7 +88,6 @@ for (let i = 1; i < 3; i++) {
     voiceList.push(voicePath + "vp" + i + ".wav");
     voiceList.push(voicePath + "vm" + i + ".wav");
     voiceList.push(voicePath + "vw" + i + ".wav");
-
 }
 
 for (let i = 1; i < 5; i++) {
@@ -89,16 +95,27 @@ for (let i = 1; i < 5; i++) {
 }
 
 for (let i = 1; i < 65; i++) {
-    jfyList.push("jY" + i,"fY" + i);
+    imgList.push(targetPath + "jY" + i + '.png', targetPath + "fY" + i + '.png');
+    jyList.push("jY" + i);
+    fyList.push("fY" + i);
 }
 
-jfyList.shuffle();
+jyList.shuffle();
+fyList.shuffle();
 
+//将block1和block2数组分别挂载上相同的目标刺激
 for (let i = 0; i < 128; i++) {
     arrayOfMan[i].dg = "md";
     arrayOfWoman[i].dg = "wd";
-    arrayOfMan[i].target = jfyList[i];
-    arrayOfWoman[i].target = jfyList[i];
+    if(i <= 63) {
+        arrayOfMan[i].target = jyList[i];
+        arrayOfWoman[i].target = jyList[i];
+    }else {
+        let f = i - 64;
+        arrayOfMan[i].target = fyList[f];
+        arrayOfWoman[i].target = fyList[f];
+    }
+    
 }
 
 arrayOfMan.shuffle();
@@ -115,7 +132,7 @@ var enter_fullscreen = {
 //预加载
 let preload = {
     type: jsPsychPreload,
-    images: imgList,
+    images: [imgList],
     audio: voiceList,
     show_detailed_errors: true,
     message: `<div>正在加载资源，请稍后</div>`
@@ -153,6 +170,7 @@ let participantInfo = {
     }
 }
 
+//指导语
 let instructions = {
     type: jsPsychInstructions,
     pages: [
@@ -165,10 +183,10 @@ let instructions = {
         `
         <div >请仔细阅读以下实验说明</div>
         <div class="mt15">
-            <div class="mt15">首先你将会看到一张直视你的面孔，随后这张面孔会向左或向右注视，</div>
-            <div class="mt15">接着屏幕左右两侧会随机出现一张照片，你需要根据该照片进行如下操作：</div>
-            <div class="mt15">1）当照片为女性时请按<text style="color:red">“F”</text>键，当照片为男性时请按<text style="color:red">“J”</text>键</div>
-            <div class="mt15">2）对照片的喜爱程度进行1-9的打分</div>
+            <div class="mt15">首先，你会看到一个人的照片，然后其会消失</div>
+            <div class="mt15">接着，在屏幕左侧或右侧会出现第二个人的照片，并且停留在屏幕上，你需要根据该照片进行以下判断：</div>
+            <div class="mt15">1）当该照片为<text class="bold">男性</text>时请按<text class="rb"> F </text>键，为<text class="bold">女性</text>时请按<text class="rb"> J </text>键（请牢记性别对应的按键）</div>
+            <div class="mt15">2）对该照片的喜爱程度进行1-9的打分，1代表非常不喜欢，9代表非常喜欢</div>
             <div class="mt15">实验中途遇到任何问题请与主试联系</div>
             <div class="mt15">准备好了请按空格键开始<text style="font-weight:bold">练习</text></div>
         </div>
@@ -254,7 +272,7 @@ let target = {
 let rate = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `<div>
-        <div style="margin-bottom:10px">请对刚刚出现的面孔进行喜爱度评价</div>
+        <div style="margin-bottom:10px">请对刚刚出现的第二个人的照片进行喜爱度评价</div>
         <div style="margin-bottom:20px">按下数字键1~9进行评价</div>
         <div style="display:flex;">
             <div style="width:70px;height:30px"></div>
@@ -280,9 +298,13 @@ let rate = {
 //循环练习试次
 let crossroads = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<div style="margin-bottom:20px">练习试次已结束，按 1 再进行一次练习</div>
-              <div>若您已经准备好了，按 2 开始<text style="color:#CD2626">正式实验</text></div>`,
-    choices: ['1', '2']
+    stimulus: `
+              <div style="margin-bottom:10px">练习试次已结束，按 A 再进行一次练习</div>
+              <div style="margin-bottom:20px">若您已经准备好了，按 B 开始<text style="color:#CD2626">正式实验</text></div>
+              <div style="margin-bottom:10px">如果对实验流程仍有疑惑，请先与主试沟通后再开始正式实验</div>
+              <div><提示：第二张照片为<text class="bold">男性</text>时请按<text class="rb"> F </text>键，为<text class="bold">女性</text>时请按<text class="rb"> J </text>键></div>
+              `,
+    choices: ['A', 'B']
 }
 
 //休息
