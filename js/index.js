@@ -1,7 +1,7 @@
 let jsPsych = initJsPsych({
     use_webaudio: true,
     on_finish: function () {
-        jsPsych.data.get().localSave('csv', expName);
+        jsPsych.data.get().localSave('csv', 'experimentdata');
     }
 });
 let expName = '实验结果';
